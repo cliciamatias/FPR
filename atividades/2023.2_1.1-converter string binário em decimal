@@ -1,0 +1,74 @@
+ /*Questão 01:
+Pede-se o desenvolvimento de uma função que, dada uma string representando um número binário (ou seja, contendo
+apenas os caracteres 0 e 1), converta-o para a base decimal.
+Notas:
+- A função solicitada deverá chamar outra função que validará se a string representa um número binário. Se não
+consistir em um número binário, o valor -1 deverá ser retornado; caso contrário, o número inteiro decimal
+equivalente será retornado;
+- Durante a leitura das questões da prova, será apresentado um exemplo que evidencie o processo de transformação
+de um número binário em decimal.*/
+#include <stdio.h>
+int verificarBinario(char binario[]);
+int conversaoBinario(char binario[]);
+void main()
+{
+	char binario[40];
+	int retorno;
+	
+	printf("Digite a string em binario: ");
+	gets(binario);
+	
+	//chamando a função que converte string representando binário para decimal
+	retorno = conversaoBinario(binario);
+	
+	//exibindo o resultado
+	if(retorno == -1)
+	{
+		printf("\nValor nao binario!");
+	}
+	else
+	{
+		printf("\n%s em decimal: %d ", binario, retorno);
+	}
+}
+int verificarBinario(char binario[])
+{
+	int i;
+	for(i=0; binario[i]; i++)
+	{
+		//verificando se há caracteres diferentes de 0 e 1
+		if((binario[i] != '1') && (binario[i] != '0'))
+		{
+			return 0; //retornando 0 pois não é binário
+		}
+	}
+	return 1; //retornando 1 pois é binário
+}
+int conversaoBinario(char binario[])
+{
+	int i, decimal=0, potencia=1, tamanho=strlen(binario), valido;
+	
+	 //percorrendo a string da direita para a esquerda, para aplicar a regra da conversão
+	for(i=tamanho-1; i>=0; i--)
+	{
+		//verificando os caracteres 1 na string
+		if(binario[i] == '1')
+		{
+			//decimal acumulando a soma das potencias de 2 onde há o caracter 1
+			decimal+=potencia;
+		}
+		//calculando as potencias de 2 sucessivamente 
+		potencia*=2;
+	}
+	//chamando a função que validará se a string representa um número binário
+	valido = verificarBinario(binario);
+	
+	if(valido == 1)
+	{
+		return decimal; //retornando o valor em decimal
+	}
+	else
+	{	
+		return -1; //retornando -1 pois não é um valor binário
+	}
+}
