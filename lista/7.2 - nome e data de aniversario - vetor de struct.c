@@ -11,87 +11,88 @@ fazem aniversário no mês M;
 aniversário entre as datas d1 e d2, ambas
 do tipo TData.*/
 #include <stdio.h>
+#include <string.h>
 #define TAM 3
 
 typedef struct
 {
-	int dia;
-	int mes;
+    int dia;
+    int mes;
 } tipoData;
 
 typedef struct
 {
-	char nome[30];
-	tipoData data;
+    char nome[30];
+    tipoData data;
 } tipoNiver;
 
-void dados(tipoNiver pessoa[], tipoData diaMes[], int tamanho);
+void dados(tipoNiver pessoa[], int tamanho);
 int quantNiverMes(tipoNiver pessoa[], int tamanho, int m);
-void pessoasEntreD1eD2(tipoData data[], tipoNiver pessoa[], int tamanho, int d1, int d2);
+void pessoasEntreD1eD2(tipoNiver pessoa[], int tamanho, tipoData d1, tipoData d2);
 
 void main()
 {
-	tipoNiver aniversariante[TAM];
-	tipoData diaMes[TAM];
-	int m, d1, d2, quant;
+    tipoNiver aniversariante[TAM];
+    int m, quant;
+
+    dados(aniversariante, TAM);
+
+    printf("\n\nDigite o mes desejado: ");
+    scanf("%d", &m);
+    quant = quantNiverMes(aniversariante, TAM, m);
+    printf("\n\nA quantidade de pessoas que fazem aniversario no mes %d: %d", m, quant);
 	
-	dados(aniversariante, diaMes, TAM);
-	
-	printf("\n\nDigite o mes desejado: ");
-	scanf("%d", &m);
-	
-	printf("Digite o valor de D1: ");
-	scanf("%d", &d1);
-	printf("Digite o valor de D2: ");
-	scanf("%d", &d2);
-	
-	quant = quantNiverMes(aniversariante, TAM, m);
-	printf("\n\nA quantidade de pessoas que fazem aniversario no mes %d: %d", m, quant);
-	pessoasEntreD1eD2(diaMes, aniversariante, TAM, d1, d2);
+	//declarando 'd1' e 'd2' com tipo 'tipoData'
+    tipoData d1 = {1, 3};
+    tipoData d2 = {31, 8};
+	//exibindo nome de pessoa entre as datas
+    printf("\n\nAniversariantes entre as datas %d/%d e %d/%d: \n", d1.dia, d1.mes, d2.dia, d2.mes);
+    pessoasEntreD1eD2(aniversariante, TAM, d1, d2);
 }
-//não pede, mas prefiro solicitar cada dado
-void dados(tipoNiver pessoa[], tipoData diaMes[], int tamanho)
+//lendo os dados de cada aniversariante
+void dados(tipoNiver pessoa[], int tamanho)
 {
-	int i;
-	for(i=0; i<tamanho; i++)
-	{
-		printf("\n\n-------Dados da pessoa %d:-------\n", i+1);
-		printf("Digite o nome: ");
-		fflush(stdin);
-		gets(pessoa[i].nome);
-		
-		printf("Digite o dia: ");
-		scanf("%d", &diaMes[i].dia);
-		
-		printf("Digite o mes: ");
-		scanf("%d", &diaMes[i].mes);
-	}
+    int i;
+    for(i=0; i<tamanho; i++)
+    {
+        printf("\n\n-------Dados da pessoa %d:-------\n", i + 1);
+        printf("Digite o nome: ");
+        scanf("%s", pessoa[i].nome);
+
+        printf("Digite o dia de aniversario: ");
+        scanf("%d", &pessoa[i].data.dia);
+
+        printf("Digite o mes de aniversario: ");
+        scanf("%d", &pessoa[i].data.mes);
+    }
 }
+//Determinando a quantidade de pessoas que fazem aniversário no mês 'M'
 int quantNiverMes(tipoNiver pessoa[], int tamanho, int m)
 {
-	int i, cont=0;
-	//percorrendo o vetor de 'aniversariante'
-	for(i=0; i<tamanho; i++)
-	{
-		//verificando se há aniversariantes no mes escolhido 'm'
-		if(pessoa[i].data.mes == m)
-		{
-			//contando quantidade de pessoas que fazem aniversário no mês M
-			cont++;
-		}
-	}
-	return cont;
+    int i, cont = 0;
+    //percorrendo aniversariantes
+    for(i=0; i<tamanho; i++)
+    {	
+    	//verificando se o mês do aniversariante 'i' é igual ao mes escolhido e contando
+        if(pessoa[i].data.mes == m)
+        {
+            cont++; 
+        }
+    }
+    return cont;
 }
-void pessoasEntreD1eD2(tipoData data[], tipoNiver pessoa[], int tamanho, int d1, int d2)
+//exibindo os nomes de todas pessoas que fazem aniversário entre as datas d1 e d2, ambas do tipo TData
+void pessoasEntreD1eD2(tipoNiver pessoa[], int tamanho, tipoData d1, tipoData d2)
 {
-	int i;
-	
-	printf("\n\nAniversariantes entre os dias %d e %d: \n", d1, d2);
-	for(i=0; i<tamanho; i++)
-	{
-		if((data[i].dia >= d1) && (data[i].dia <= d2))
-		{
-			printf("===== %s ====\n", pessoa[i].nome);
-		}
-	}
+    int i;
+    for(i=0; i<tamanho; i++)
+    {
+    	//verificando se a data do aniversariante está entre 'd1' e 'd2' e exibindo seu nome
+        if((pessoa[i].data.mes > d1.mes && pessoa[i].data.mes < d2.mes) ||
+        (pessoa[i].data.mes == d1.mes && pessoa[i].data.dia >= d1.dia) ||
+        (pessoa[i].data.mes == d2.mes && pessoa[i].data.dia <= d2.dia))
+        {
+            printf("-------- %s --------\n", pessoa[i].nome);
+        }
+    }
 }
