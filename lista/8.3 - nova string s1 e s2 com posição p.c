@@ -15,13 +15,22 @@ void main()			// |s1|p|s2 |
 	char string[30] = "algoritmo";
 	char s1[30];   //algo
 	char s2[30];   //ritmo
-	int p = 4;
+	int p = 4, retorno;
 	
-	criarS1eS2(string,s1,s2,p);
+	//chamando a função
+	retorno = criarS1eS2(string,s1,s2,p);
 	
-	printf("s: %s\n", string);
-	printf("s1: %s\n", s1);
-	printf("s2: %s", s2);
+	//exibindo resultado
+	if(retorno == 1)
+	{
+		printf("s: %s\n", string);
+		printf("s1: %s\n", s1);
+		printf("s2: %s", s2);
+	}
+	else
+	{
+		printf("Posicao invalida!");
+	}
 }
 int criarS1eS2(char s[], char s1[], char s2[], int p)
 {
@@ -47,5 +56,6 @@ int criarS1eS2(char s[], char s1[], char s2[], int p)
 			s2[j] = s[i];
 		}
 		s2[i-p] = '\0'; //encerrando 's2'
+		return 1;
 	}
 }
