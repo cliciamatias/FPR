@@ -1,7 +1,7 @@
-/*Quest„o 06:
-Dada uma string s, desenvolver uma funÁ„o
-recursiva que determine se s È ou n„o um
-palÌndromo.*/
+/*Quest√£o 06:
+Dada uma string s, desenvolver uma fun√ß√£o
+recursiva que determine se s √© ou n√£o um
+pal√≠ndromo.*/
 #include <stdio.h>
 #include <string.h>
 int stringPalindromo(char s[], int inicio, int fim);
@@ -11,8 +11,8 @@ void main()
 	int tamanho, retorno;
 	
 	tamanho = strlen(string); //contando o quantidade de caracteres da string
-	//chamando a funÁ„o
-	retorno = stringPalindromo(string, 0, tamanho-1); //chamando a funÁ„o com a string, seu inicio e seu fim
+	//chamando a fun√ß√£o
+	retorno = stringPalindromo(string, 0, tamanho-1); //chamando a fun√ß√£o com a string, seu inicio e seu fim
 	
 	if(retorno == 0)
 	{
@@ -29,14 +29,18 @@ int stringPalindromo(char s[], int inicio, int fim)
 	{
 		return 1;
 	}
-	//se o inicio da string for igual ao fim, verificar se È palÌndromo
-	if(s[inicio] == s[fim])
+        else
 	{
-		//somando o inicio e subtraindo o fim para ver se os caracteres "espelhados" de cada lado s„o iguais, pois ser· palÌndromo
-		stringPalindromo(s, inicio+1, fim-1);
-	}
-	else
-	{
-		return 0; //retornando 0, pois n„o È palÌndromo
+		//se o inicio da string for igual ao fim, verificar se √© pal√≠ndromo
+		if(s[inicio] == s[fim])
+		{
+			//somando o inicio e subtraindo o fim para ver se os caracteres "espelhados" de cada lado s√£o iguais, pois ser√° pal√≠ndromo
+			stringPalindromo(s, inicio+1, fim-1);
+		}
+		else
+		{
+			return 0; //retornando 0, pois n√£o √© pal√≠ndromo
+		}
+
 	}
 }
