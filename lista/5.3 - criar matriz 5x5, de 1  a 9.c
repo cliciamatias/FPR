@@ -10,7 +10,7 @@ matriz M5x5:
 void matriz5x5(int lin, int col, int m[lin][col]);
 void main()
 {
-	int i, j, linha=5, coluna=5;
+	int linha=5, coluna=5;
 	int matriz[linha][coluna];
 	
 	//chamando a função
@@ -24,7 +24,7 @@ void matriz5x5(int lin, int col, int m[lin][col])
 	{
 		for(j=0; j<col; j++)
 		{
-			//matriz percorrendo cada linha 'i'(1a5), com j+contador sendo somado de 1 em 1 cada coluna
+			//matriz percorrendo cada linha 'i'(1 a 5), com j+contador sendo somado de 1 em 1 cada coluna
 			m[i][j] = j+cont;
 			printf("%d ", m[i][j]);
 		}

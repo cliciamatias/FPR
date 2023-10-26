@@ -44,9 +44,10 @@ int trocarColunas(int m[L][C], int c1, int c2)
 	//verificando se as colunas escolhodas são válidas
 	if((c1>=0 && c1<C) && (c2>=0 && c2<C))
 	{
+		//percorrendo as linhas da matriz
 		for(i=0; i<L; i++)
 		{
-			//trocando os elementos das colunas
+			//trocando os elementos das colunas (da coluna 1 para a coluna 2)
 			colAux = m[i][c1];
 			m[i][c1] = m[i][c2];
 			m[i][c2] = colAux;

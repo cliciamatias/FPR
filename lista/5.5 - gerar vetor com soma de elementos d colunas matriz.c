@@ -9,7 +9,7 @@ consiste na soma dos elementos da segunda
 coluna de M, e assim por diante.
 */
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> //função preencherMatriz
 #include <time.h>
 void preencherAleatorio(int lin, int col, int m[lin][col]);
 void exibirMatriz(int lin, int col, int m[lin][col]);
@@ -17,27 +17,34 @@ void somaColuna(int lin, int col, int m[lin][col], int vetor[]);
 
 void main()
 {
-	int i, linha=4, coluna=8;
+	int i, linha=10, coluna=8;
 	int matriz[linha][coluna], vetor[coluna];
 	
-	preencherAleatorio(linha,coluna,matriz);
-	exibirMatriz(linha,coluna,matriz);
+	preencherAleatorio(linha,coluna,matriz); //preenchendo matriz de aleatórios
+	exibirMatriz(linha,coluna,matriz); //exibindo matriz
+	
+	//chamando a função da soma de colunas
 	somaColuna(linha,coluna,matriz, vetor);
-	//printf("Vetor: ");
+	
+	//exibindo vetor com a soma das colunas da matriz
 	for(i=0; i<coluna; i++)
 	{
-		printf("|%d| ", vetor[i]);
+		printf("%d ", vetor[i]);
 	}
 }
 void somaColuna(int lin, int col, int m[lin][col], int vetor[])
 {
 	int i, j;
 	
+	//percorrendo as colunas da matriz
 	for(j=0; j<col; j++)
 	{
+		//inicializando o vetor que será preenchido com o somatório das colunas
 		vetor[j] = 0;
+		//percorrendo as linhas da matriz
 		for(i=0; i<lin; i++)
 		{
+			//vetor rcebendo soma de cada coluna da matriz
 			vetor[j] += m[i][j];	
 		}
 	}

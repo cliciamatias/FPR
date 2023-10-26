@@ -54,14 +54,13 @@ void main()
 	
 	menorVenda = funcMenorVenda(linha,coluna,matriz);
 	printf("\n\nO funcionário que menos vendeu durante o ano: %d.", menorVenda);
-    
 }
 //Determinar o funcionário que menos vendeu durante o ano
 int funcMenorVenda(int lin, int col, int m[lin][col])
 {
-    int j, total, menor=99, menorFunc;
+    int j, total, menor=99, menorFunc=99;
     
-    for(j=1; j<col; j++)
+    for(j=0; j<col; j++)
     {
     	total = totalFuncAno(lin,col,m,j+1);
     	if(total < menor)
@@ -72,11 +71,12 @@ int funcMenorVenda(int lin, int col, int m[lin][col])
     }
     return menorFunc;
 }
-
+//função que determina o mês com maior índice de vendas
 int indiceMaiorVendaMes(int lin, int col, int m[lin][col])
 {
-    int i, maior=0, total, maiorMes;
+    int i, maior=0, total, maiorMes=0;
     
+    //percorrendo as linhas (mês)
     for(i=0; i<lin; i++)
     {
         total = totalVendaMes(lin,col,m, i+1);
@@ -88,42 +88,48 @@ int indiceMaiorVendaMes(int lin, int col, int m[lin][col])
     }
     return maiorMes;
 }
-
+//dado um funcionário fornecido pelo usuário, determinar o total vendido por ele durante o ano
 int totalFuncAno(int lin, int col, int matriz[lin][col], int func)
 {
 	int i, total=0;
-    //transformando o nunero de funcionários de 1 a 10 para 0 a 9
-    func--;
+	
+    func--; //transformando o nunero de funcionários de 0 a 9 para 1 a 10
 	for(i=0; i<lin; i++)
 	{
+		//somando todas os valores da coluna(funcionário) escolhido
 		total += matriz[i][func];
 		printf("|%d| ", matriz[i][func]);
 	}
 	return total;
 }
-
+//Dado um mês fornecido pelo usuário, determinar o total vendido nesse mês
 int totalVendaMes(int lin, int col, int matriz[lin][col], int mes)
 {
 	int j, total=0;
-    //convertendo mes de 1 a 12 para 0 a 11
-	mes--;
+    
+	mes--;//convertendo mes de 0 a 11 para 1 a 10
+	//percorrendo as colunas da matriz
 	for(j=0; j<col; j++)
 	{
+		//somando todos os valores da linha escolhida(mes)
 		total += matriz[mes][j];
 		//exibindo a linha (mês) da matriz escolhido pelo usuário
 		printf("|%d| ", matriz[mes][j]);
 	}
 	return total;
 }
-
+//Calcular o total vendido durante o ano
 int totalVendaAno(int lin, int col, int matriz[lin][col])
 {
 	int i, j, total=0;
 	
+	//percorrendo as linhas da matiz
 	for(i=0; i<lin; i++)
 	{
+		//percorrendo as colunas da matriz
 		for(j=0; j<col; j++)
 		{
+			//somando todos os valores da matriz
 			total += matriz[i][j];
 		}
 	}

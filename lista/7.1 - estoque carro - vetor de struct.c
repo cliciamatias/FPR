@@ -21,11 +21,13 @@ dada a sua placa.*/
 #include <stdio.h>
 #include <string.h>
 #define TAM 3 //quantidade de carros em estoque
+
 typedef struct
 {
 	int fabricacao;
 	int modelo;
 } tipoAno;
+
 typedef struct
 {
 	char placa[8];
@@ -38,46 +40,38 @@ typedef struct
 	char tipo[6];
 	
 } tipoCarro;
-
-
-int removerCarro(tipoCarro estoque[], int quantidade, char placa[])
+//Retirar do estoque um determinado veículo, dada a sua placa
+int removerCarro(tipoCarro estoque[], int *quantidade, char placa[])
 {
 	int i, j;
 	
-	for(i=0; i<quantidade; i++)
+	for(i=0; i<*quantidade; i++)
 	{
-		//verificadno se é o carro a ser removido
 		if(strcmp(estoque[i].placa, placa) == 0)
 		{
-			for(j=i+1; j<*quantidade; j++) //j inicia com o proxima posição
+			for(j=i+1; j<*quantidade; j++)
 			{
 				estoque[j-1] = estoque[j];
 			}
-			//atualizando quant de carros 
 			(*quantidade)--;
 			return 1;
 		}
 	}
 	return 0;
 }
-
+//Reajustar os valores de todos os carros 0km, considerando um aumento de p %;
 void reajustarCarros0km(tipoCarro estoque[], int quantidade, float p)
 {
 	int i;
 	
 	for(i=0; i<quantidade; i++)
 	{
-		//verificando se o carro da posição 'i' é 0km
-		if(strcmp(estoque[i].tipo), "0km" == 0)
+		if(strcmp(estoque[i].tipo, "0 km") == 0)
 		{
-			//reajustar o valor do carro
-			estoque[i].valor += (estoque[i].valor * (p/100));
-			
+			estoque[i].valor += (estoque[i].valor * (p/100.0));
 		}
-		
 	}
 }
-
 void exibirDadosCarro(tipoCarro carro)
 {
 	printf("Placa: %s\n", carro.placa);
@@ -89,33 +83,59 @@ void exibirDadosCarro(tipoCarro carro)
 	printf("Tipo: %s\n", carro.tipo);
 }
 
-
+//Exibir todos os carros do modelo m, ano de fabricação entre a1 e a2 (inclusive), com valor não superior a x reais;
 void exibirFiltros(tipoCarro estoque[], int quantidade, char m[], int a1, int a2, float xReais)
 {
 	int i;
 	
-	//percorredno o vetor de carros
 	for(i=0; i<quantidade; i++)
 	{
-		//verificando se o carro da posição 'i' do vetor atende ao solicitado
 		if(strcmp(estoque[i].modelo, m) == 0 && 
-		((estoque[i].ano.fabricacao >= a1) && (estoque[i].ano.fabricacao <= a2)) && 
-		(estoque[i].valor <= xReais) ) //strcmp - compara strings, no caso o modelo em estoque com o solicitado pelo usuário
+		(estoque[i].ano.fabricacao >= a1 && estoque[i].ano.fabricacao <= a2) && 
+		(estoque[i].valor <= xReais))
 		{
 			exibirDadosCarro(estoque[i]);
 		}
 	}	
 }
-void main()
+
+int main()
 {
-	char modelo[20];
-	int a1, a2;
-	float xReais;
-	float p;
-	char placa[20];
-	tipoCarro estoque[TAM] = {
-		{"placa1", "modelo1", "marca1", "cor1", 0.1, 1, 100.00, "tipo1"},
-		{"placa2", "modelo2", "marca2", "cor2", 0.2, 2, 200.00, "tipo2"},
-		{"placa3", "modelo3", "marca3", "cor3", 0.3, 3, 300.00, "tipo3"},
-	};
+	tipoCarro estoque[TAM];
+
+	strcpy(estoque[0].placa, "placa1");
+	strcpy(estoque[0].modelo, "modelo1");
+	strcpy(estoque[0].marca, "marca1");
+	strcpy(estoque[0].cor, "cor1");
+	estoque[0].quilometragem = 1.0;
+	estoque[0].ano.fabricacao = 2001;
+    estoque[0].ano.modelo = 2002;
+    estoque[0].valor = 100.00;
+	strcpy(estoque[0].tipo, "tipo1");
+	
+	strcpy(estoque[1].placa, "placa2");
+	strcpy(estoque[1].modelo, "modelo2");
+	strcpy(estoque[1].marca, "marca2");
+	strcpy(estoque[1].cor, "cor2");
+    estoque[1].quilometragem = 2.0;
+    estoque[1].ano.fabricacao = 2003;
+    estoque[1].ano.modelo = 2004;
+    estoque[1].valor = 200.00;
+	strcpy(estoque[1].tipo, "tipo2");
+	
+	strcpy(estoque[2].placa, "placa3");
+	strcpy(estoque[2].modelo, "modelo3");
+	strcpy(estoque[2].marca, "marca3");
+	strcpy(estoque[2].cor, "cor3");
+    estoque[2].quilometragem = 3.0;
+    estoque[2].ano.fabricacao = 2005;
+    estoque[2].ano.modelo = 2006;
+    estoque[2].valor = 300.00;
+	strcpy(estoque[2].tipo, "tipo3");
+
+//i. Exibir todos os carros do modelo m, ano de fabricação entre a1 e a2 (inclusive), com valor não superior a x reais;
+	exibirFiltros(estoque, TAM, "modelo2", 2001, 2004, 200.00);
+
+
+	return 0;
 }
