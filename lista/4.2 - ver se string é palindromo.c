@@ -1,17 +1,18 @@
-/*Quest„o 02:
-Dada uma string s, desenvolver uma funÁ„o
-que determine se s È ou n„o um palÌndromo.
-ObservaÁ„o: uma string s ser· um palÌndromo
+/*Quest√£o 02:
+Dada uma string s, desenvolver uma fun√ß√£o
+que determine se s √© ou n√£o um pal√≠ndromo.
+Observa√ß√£o: uma string s ser√° um pal√≠ndromo
 quando seus caracteres formarem a mesma
-sequÍncia, independente se s È percorrida da
+sequ√™ncia, independente se s √© percorrida da
 esquerda para direita ou vice-versa.*/
 #include <stdio.h>
 #include <string.h>
+
 int palindromo(char s[]);
 void main()
 {
-	char s[30] = "OSSO"; //EH palindromo
-	int retorno = palindromo(s); //chamando a funÁ„o
+	char s[20] = "alaa"; //EH palindromo
+	int retorno = palindromo(s); //chamando a fun√ß√£o
 	
 	//verificando o retorno e exibindo o resultado
 	if(retorno == 1)
@@ -26,61 +27,50 @@ void main()
 }
 int palindromo(char s[])
 {
-	int i;
-	int tamanho = strlen(s);
+	int i, tamanho = strlen(s);
 	
 	//percorrendo a string 's'
 	for(i=0; s[i]; i++)
 	{
-		//verificando se o ultimo caracter È igual ao primeiro e assim por diante
-		if(s[i] == s[tamanho-1])
+		//verificando se o ultimo caracter √© igual ao primeiro e assim por diante
+		if(s[i] != s[tamanho-i-1])
 		{
-			return 1;
-		}
-		else
-		{
-			return 0;
+			return 0; //retornando '0' pois se os caracteres n√£o forem iguais n√£o √© um palindromo
 		}
 	}
+	return 1; //retornando 1, pois se saiu do for √© palindromo
 }
-
-
 /*
 #include <stdio.h>
 #include <string.h>
 int palindromo(char s[]);
 void main()
 {
-	char string[30];
-	int retorno;
-	
-	printf("Digite uma string: ");
-	fflush(stdin);
-	gets(string);
-	
-	retorno = palindromo(string);	
+	char s[20] = "osso";
+	int retorno = palindromo(s); //chmando a funcao
 	
 	if(retorno == 1)
 	{
-		printf("\nEsta string eh palindromo.");
+		printf("'%s' eh palindromo.\n", s);
 	}
 	else
 	{
-		printf("\nEsta string NAO eh palindromo.");
+		printf("'%s' nao eh palindromo.", s);
 	}
 }
 int palindromo(char s[])
 {
 	int i, tamanho=strlen(s);
 	
-	//percorendo a string atÈ a sua matade, pois È espelhado se da direita ou esquerda forem os mesmos caracteres
+	//percorendo a string at√© a sua matade, pois √© espelhado se da direita ou esquerda forem os mesmos caracteres
 	for(i=0; i<tamanho/2; i++)
 	{
-		//verificando se a string È a mesma de tr·s para frente
+		//verificando se a string √© a mesma de tr√°s para frente
 		if(s[i] != s[tamanho-i-1]) 
 		{
-           	return 0; //retornando '0' pois se os caracteres n„o forem iguais n„o È um palindromo
+           	return 0; //retornando '0' pois se os caracteres n√£o forem iguais n√£o √© um palindromo
         }
 	}
-	return 1; //retornando 1, pois se saiu do for È palindromo
-}*/
+	return 1; //retornando 1, pois se saiu do for √© palindromo
+}
+*/
