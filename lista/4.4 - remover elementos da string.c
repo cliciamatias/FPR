@@ -1,7 +1,44 @@
-/*Quest„o 04:
-Implementar uma funÁ„o que remova todas as
-ocorrÍncias de determinado caracter em uma
+/*Quest√£o 04:
+Implementar uma fun√ß√£o que remova todas as
+ocorr√™ncias de determinado caracter em uma
 string.*/
+#include <stdio.h>
+void remover(char s[], char c);
+void main()
+{
+	char s[20] = "rabanada";
+	char c = 'a';
+	
+	printf("String antes da remocao de %c: %s\n\n", c, s);
+	remover(s, c); // chamando a funcao
+	printf("String depois da remocao de %c: %s", c, s);
+	
+}
+void remover(char s[], char c)
+{
+	int i, j;
+	//percorrendo a string
+	for(i=0; s[i]; i++)
+	{
+		//encontrando o caracter a ser removido
+		if(s[i] == c)
+		{
+			//percorrendo a string sem o caracter
+			for(j=i; s[j]; j++)
+			{
+				s[j] = s[j+1]; //'andando' com os caracteres
+			}
+			//i--;  //nao entendi o porque do i--, pois sem ele funciona normalmente
+		}
+	}
+}
+
+//----------------------------------------------------------------------------------------------------------------
+/*Quest√£o 04:
+Implementar uma fun√ß√£o que remova todas as
+ocorr√™ncias de determinado caracter em uma
+string.*/
+/*
 #include <stdio.h>
 #include <string.h>
 void remover(char s[], char caracter);
@@ -11,7 +48,7 @@ void main()
 	char caracter = 'o';
 	
 	printf("String original: %s.", s);
-	//chamando a funÁ„o
+	//chamando a fun√ß√£o
 	remover(s,caracter);
 	//exibindo o resultado
 	printf("\nString sem '%c' : %s.", caracter, s);
@@ -36,6 +73,8 @@ void remover(char s[], char caracter)
 		}
 	}
 }
+*/
+//--------------------------------------------------------------------------------------------------------------------
 /*
 #include <stdio.h>
 #include <string.h>
@@ -48,11 +87,11 @@ void main()
 	fflush(stdin);
 	gets(string);
 
-	//lendo caracter da string que ser· removido
+	//lendo caracter da string que ser√° removido
 	printf("\n\nDigite o caracter a ser removido: ");
 	fflush(stdin);
 	scanf("%c", &caracter);
-	//chamando a funÁ„o
+	//chamando a fun√ß√£o
 	removerCaracter(string,caracter);
 	printf("\n\nString com caracter removido: %s", string);
 }
@@ -62,7 +101,7 @@ void removerCaracter(char s[], char c)
 	//percorrendo a string
 	for(i=0; s[i]; i++)
 	{
-		//verificando se na string h· o caracter a ser removido
+		//verificando se na string h√° o caracter a ser removido
 		if(s[i] == c)
 		{
 			//se encontrar o caracter, entra no for e percorre ele para remover a letra
