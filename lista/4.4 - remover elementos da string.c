@@ -33,6 +33,69 @@ void remover(char s[], char c)
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+____________________________________________________________________________________________________________________________________________________________________________________________________________
+
+
+/*Questão 04:
+Implementar uma função que remova todas as
+ocorrências de determinado caracter em uma
+string.*/
+#include <stdio.h>
+void remover(char s[], char c);
+void main()
+{
+	char s[20] = "rabanada";
+	char c = 'a';
+	
+	printf("String antes da remocao de %c: %s\n\n", c, s);
+	remover(s, c); // chamando a funcao
+	printf("String depois da remocao de %c: %s", c, s);
+	
+}
+void remover(char s[], char c)
+{
+	int i, j;
+	//percorrendo a string
+	for(i=0; s[i]; i++)
+	{
+		//encontrando o caracter a ser removido
+		if(s[i] == c)
+		{
+			//percorrendo a string sem o caracter
+			for(j=i; s[j]; j++)
+			{
+				s[j] = s[j+1]; //'andando' com os caracteres
+			}
+			//i--;  //nao entendi o porque do i--, pois sem ele funciona normalmente
+		}
+	}
+}
+
 //----------------------------------------------------------------------------------------------------------------
 /*Questão 04:
 Implementar uma função que remova todas as
