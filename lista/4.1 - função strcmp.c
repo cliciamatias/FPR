@@ -5,7 +5,6 @@ implementação de funções que tenham o
 mesmo objetivo daquelas.*/
 
 #include <stdio.h>
-#include <string.h>
 int funcaoStrcmp(char s1[], char s2[]);
 void main()
 {
