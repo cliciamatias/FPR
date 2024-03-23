@@ -33,69 +33,6 @@ void remover(char s[], char c)
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-____________________________________________________________________________________________________________________________________________________________________________________________________________
-
-
-/*Questão 04:
-Implementar uma função que remova todas as
-ocorrências de determinado caracter em uma
-string.*/
-#include <stdio.h>
-void remover(char s[], char c);
-void main()
-{
-	char s[20] = "rabanada";
-	char c = 'a';
-	
-	printf("String antes da remocao de %c: %s\n\n", c, s);
-	remover(s, c); // chamando a funcao
-	printf("String depois da remocao de %c: %s", c, s);
-	
-}
-void remover(char s[], char c)
-{
-	int i, j;
-	//percorrendo a string
-	for(i=0; s[i]; i++)
-	{
-		//encontrando o caracter a ser removido
-		if(s[i] == c)
-		{
-			//percorrendo a string sem o caracter
-			for(j=i; s[j]; j++)
-			{
-				s[j] = s[j+1]; //'andando' com os caracteres
-			}
-			//i--;  //nao entendi o porque do i--, pois sem ele funciona normalmente
-		}
-	}
-}
-
 //----------------------------------------------------------------------------------------------------------------
 /*Questão 04:
 Implementar uma função que remova todas as
@@ -135,47 +72,5 @@ void remover(char s[], char caracter)
 			i--;
 		}
 	}
-}
-*/
-//--------------------------------------------------------------------------------------------------------------------
-/*
-#include <stdio.h>
-#include <string.h>
-void removerCaracter(char s[], char c);
-void main()
-{
-	char string[30], caracter;
-	
-	printf("\n\nDigite uma string: ");
-	fflush(stdin);
-	gets(string);
-
-	//lendo caracter da string que será removido
-	printf("\n\nDigite o caracter a ser removido: ");
-	fflush(stdin);
-	scanf("%c", &caracter);
-	//chamando a função
-	removerCaracter(string,caracter);
-	printf("\n\nString com caracter removido: %s", string);
-}
-void removerCaracter(char s[], char c)
-{
-	int i, j;
-	//percorrendo a string
-	for(i=0; s[i]; i++)
-	{
-		//verificando se na string há o caracter a ser removido
-		if(s[i] == c)
-		{
-			//se encontrar o caracter, entra no for e percorre ele para remover a letra
-			for(j=i; s[j];j++)
-			{
-				//substtuindo a letra pela posterior (andando com as letras)
-				s[j] = s[j+1];
-			}
-			//decrementando o 'i' para q todas as letras escolhidas sejam removidas
-			i--;
-		}
-	}	
 }
 */
