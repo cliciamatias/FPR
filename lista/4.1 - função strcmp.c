@@ -42,14 +42,15 @@ void main()
 int funcaoStrcmp(char s1[], char s2[])
 {
         int i;
-
+        //percorrendo as strings
         for(i=0; s1[i] && s2[i] && (s1[i]==s2[i]); i++);
-        
+
+        //retornando o resultado da "subtração" das strings de acordo com a tabela ASCII
         return (s1[i]-s2[i]);
         
         
         
-       /* 
+       /* OUTRA FORMA DE RETORNAR SEUS RESULTADOS, MAS NAO EFICIENTE POIS FALHA EM CASO DE STRINGS COMO "CASA" E "CASAMENTO", POIS NAO LÊ O FIM DAS DUAS E ENTENDE QUE SAO IGUAIS
         {
                 if(s1[i] == s2[i])
                 {
