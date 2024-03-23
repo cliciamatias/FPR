@@ -1,10 +1,38 @@
-/*Quest„o 01:
-Suponha que n„o existissem as funÁıes strlen,
-strcpy, strcat e strcmp. Pede-se, ent„o, a
-implementaÁ„o de funÁıes que tenham o
+/*Quest√£o 01:
+Suponha que n√£o existissem as fun√ß√µes strlen,
+strcpy, strcat e strcmp. Pede-se, ent√£o, a
+implementa√ß√£o de fun√ß√µes que tenham o
 mesmo objetivo daquelas.*/
+//STRCPY - COPIAR STRING DE S2 PARA S1
 #include <stdio.h>
-#include <string.h>
+void funcaoStrcpy(char s1[], char s2[]);
+void main()
+{
+	char s1[10] = "Linda";
+	char s2[10] = "demais";
+	
+	funcaoStrcpy(s1, s2); //chamando a fun√ß√£o
+	
+	printf("s1 = %s \ns2 = %s", s1, s2); //exibindo as strings, 's1'(original) e 's2'(c√≥pia)
+}
+void funcaoStrcpy(char s1[], char s2[])
+{
+	int i, j;
+	
+	//percorrendo a string 's1'
+	for(i=0; s1[i]; i++)
+	{
+		//percorrendo a string 's2'
+		for(j=0; s2[j]; j++)
+		{
+			s1[j] = s2[j]; //'s1' recebendo a string de 's2'
+		}
+	}
+	s1[j] = '\0'; //encerrando 's1' para evitar lixo de mem√≥ria
+}
+
+/*
+#include <stdio.h>
 void funcaoStrcpy(char destino[], char origem[]);
 void main()
 {
@@ -14,11 +42,11 @@ void main()
 	fflush(stdin);
 	gets(origem);
 	
-	//chamando a funÁ„o STRCPY
+	//chamando a fun√ß√£o STRCPY
 	funcaoStrcpy(destino, origem);
 	printf("\nString copiada: %s", destino);
 }
-//FUN«√O STRLEN - quantidade de letras
+//FUN√á√ÉO STRLEN - quantidade de letras
 void funcaoStrcpy(char destino[], char origem[])
 {
 	int i;
@@ -30,7 +58,7 @@ void funcaoStrcpy(char destino[], char origem[])
 		i++;
 	}
 	destino[i] = '\0';
-}
+}*/
 /*
 #include <stdio.h>
 #include <string.h>
