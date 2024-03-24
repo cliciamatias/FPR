@@ -1,7 +1,93 @@
-/*QUEST√O 02: 
-Desenvolver uma funÁ„o que, dada uma matriz 
-M15◊20, determine se um n˙mero X se encontra 
+/*QUEST√ÉO 02: 
+Desenvolver uma fun√ß√£o que, dada uma matriz 
+M15√ó20, determine se um n√∫mero X se encontra 
 na linha L da matriz.*/
+#include <stdio.h>
+void preencherAleatorio(int lin, int col, int m[lin][col]);
+int encontrarXnaLinha(int lin, int col, int m[lin][col], int numX, int numLin);
+void main()
+{
+	int lin=15, col=20, numX=2, numLin=4;
+	int m[lin][col];
+	
+	preencherAleatorio(lin,col,m);
+	int retorno = encontrarXnaLinha(lin,col,m, numX, numLin); //chamando a fun√ß√£o com a matriz
+	
+	//exibindo resultados do retorno da fun√ß√£o
+	if(retorno == 1)
+	{
+		printf("Ha o numero %d na linha %d", numX, numLin);
+	}
+	else 
+    {
+	    printf("NAO ha o numero %d na linha %d", numX, numLin);
+    }
+}
+
+int encontrarXnaLinha(int lin, int col, int m[lin][col], int numX, int numLin)
+{
+	int j;
+	
+	//percorrendo apenas as colunas, pois o numero da linha j√° temos
+	for(j=0; j<col; j++)
+	{
+		//verificando se na linhaX da matriz h√° o numero X
+		if(m[numLin][j] == numX)
+		{
+			return 1; //reotrnando 1 pois encontrou
+		}
+	}
+	return 0; //retornando 0 pois n√£o foi encontrado
+}
+//fun√ß√£o para gerar uma matriz aleatorimente
+void preencherAleatorio(int lin, int col, int m[lin][col])
+{
+	int i, j;
+	srand(time(NULL));
+	for(i=0; i<lin; i++)
+	{
+		for(j=0; j<col; j++)
+		{
+			m[i][j] = rand()%5;
+			printf(" |%d|", m[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*QUEST√ÉO 02: 
+Desenvolver uma fun√ß√£o que, dada uma matriz 
+M15√ó20, determine se um n√∫mero X se encontra 
+na linha L da matriz.*/
+/*
 #include <stdio.h>
 int encontrarXnaLinha(int lin, int col, int m[lin][col], int l, int x);
 void preencherMatriz(int lin, int col, int matriz[lin][col]);
@@ -10,7 +96,7 @@ void main()
 	int linha=15, coluna=20,numLinha, numX, retorno;
     int matriz[linha][coluna];
     
-    //chamando a funÁ„o com a matriz preenchida
+    //chamando a fun√ß√£o com a matriz preenchida
     preencherMatriz(linha, coluna, matriz);
 	    
     //lendos o numero da linha e o valor a ser encontrado
@@ -19,10 +105,10 @@ void main()
     printf("\nDigite o numero X a ser encontrado na linha %d: ", numLinha);
     scanf("%d", &numX);
     
-    //chamando a funÁ„o
+    //chamando a fun√ß√£o
 	retorno= encontrarXnaLinha(linha,coluna,matriz,numLinha,numX);
 	
-	//exibindo resultados do retorno da funÁ„o
+	//exibindo resultados do retorno da fun√ß√£o
 	if(retorno == 1)
 	{
 		printf("Ha este nunero na linha");
@@ -42,15 +128,15 @@ int encontrarXnaLinha(int lin, int col, int m[lin][col], int l, int x)
     	//percorrendo as colunas desta linha
         for(j=0; j<col; j++)
         {
-        	//verificando se na linha escolhida h· o numero X a ser encontrado
+        	//verificando se na linha escolhida h√° o numero X a ser encontrado
             if(m[l][j]==x)
             {
-            	//retornando 1, pois h· X na linha 
+            	//retornando 1, pois h√° X na linha 
                 return 1;
             }
         }
     }
-    //retornando 0, pois se saiu do for, n„o h· o numero X na linha escolhida
+    //retornando 0, pois se saiu do for, n√£o h√° o numero X na linha escolhida
     return 0;
 }
 void preencherMatriz(int lin, int col, int matriz[lin][col])
@@ -61,7 +147,7 @@ void preencherMatriz(int lin, int col, int matriz[lin][col])
     {
         for(j=0;j<col;j++)
         {
-        	//matriz recebendo os valores de 'num', comeÁando por 1
+        	//matriz recebendo os valores de 'num', come√ßando por 1
             matriz[i][j]=num;
             num++; //incrementando num para ser uma matriz com valores crescentes
             //exibindo a matriz
@@ -69,4 +155,4 @@ void preencherMatriz(int lin, int col, int matriz[lin][col])
         }
         printf("\n");
     }
-}
+}*/
