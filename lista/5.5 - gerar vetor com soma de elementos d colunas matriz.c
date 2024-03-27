@@ -1,15 +1,96 @@
-/*QUESTÃO 05:
-Implementar uma função que, dada uma matriz
-M10×8, gere um vetor V de tamanho 8, onde
+/*QUESTÃƒO 05:
+Implementar uma funÃ§Ã£o que, dada uma matriz
+M10Ã—8, gere um vetor V de tamanho 8, onde
 cada elemento do vetor consiste na soma dos
 elementos de uma coluna de M. Ou seja, o
 elemento V[0] consiste na soma dos elementos
 da primeira coluna de M, o elemento V[1]
 consiste na soma dos elementos da segunda
-coluna de M, e assim por diante.
-*/
+coluna de M, e assim por diante.*/
 #include <stdio.h>
-#include <stdlib.h> //função preencherMatriz
+void preencherMatriz(int lin, int col, int m[lin][col]);
+void soma(int lin, int col, int m[lin][col], int v[]);
+void main()
+{
+	int lin=10, col=8, i;
+	int m[lin][col], v[col];
+	
+	preencherMatriz(lin,col,m); //exibindo a matiz
+	soma(lin,col,m,v);
+	
+	printf("\nVetor com a soma das colunas:\n");
+	for(i=0;i<col;i++)
+	{
+		printf("|%d|", v[i]);
+	}
+}
+void soma(int lin, int col, int m[lin][col], int v[])
+{
+	int i, j;
+	
+	for(j=0; j<col; j++)
+	{
+		v[j]=0;
+		for(i=0; i<lin; i++)
+		{
+			v[j] += m[i][j];
+		}
+	}
+}
+
+
+
+void preencherMatriz(int lin, int col, int m[lin][col])
+{
+	int i, j;
+	srand(time(NULL));
+	for(i=0; i<lin; i++)
+	{
+		for(j=0; j<col; j++)
+		{
+			m[i][j] = rand()%9;
+			printf("%d ", m[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*QUESTÃƒO 05:
+Implementar uma funÃ§Ã£o que, dada uma matriz
+M10Ã—8, gere um vetor V de tamanho 8, onde
+cada elemento do vetor consiste na soma dos
+elementos de uma coluna de M. Ou seja, o
+elemento V[0] consiste na soma dos elementos
+da primeira coluna de M, o elemento V[1]
+consiste na soma dos elementos da segunda
+coluna de M, e assim por diante.*/
+/*
+#include <stdio.h>
+#include <stdlib.h> //funÃ§Ã£o preencherMatriz
 #include <time.h>
 void preencherAleatorio(int lin, int col, int m[lin][col]);
 void exibirMatriz(int lin, int col, int m[lin][col]);
@@ -20,10 +101,10 @@ void main()
 	int i, linha=10, coluna=8;
 	int matriz[linha][coluna], vetor[coluna];
 	
-	preencherAleatorio(linha,coluna,matriz); //preenchendo matriz de aleatórios
+	preencherAleatorio(linha,coluna,matriz); //preenchendo matriz de aleatÃ³rios
 	exibirMatriz(linha,coluna,matriz); //exibindo matriz
 	
-	//chamando a função da soma de colunas
+	//chamando a funÃ§Ã£o da soma de colunas
 	somaColuna(linha,coluna,matriz, vetor);
 	
 	//exibindo vetor com a soma das colunas da matriz
@@ -39,7 +120,7 @@ void somaColuna(int lin, int col, int m[lin][col], int vetor[])
 	//percorrendo as colunas da matriz
 	for(j=0; j<col; j++)
 	{
-		//inicializando o vetor que será preenchido com o somatório das colunas
+		//inicializando o vetor que serÃ¡ preenchido com o somatÃ³rio das colunas
 		vetor[j] = 0;
 		//percorrendo as linhas da matriz
 		for(i=0; i<lin; i++)
@@ -75,4 +156,4 @@ void exibirMatriz(int lin, int col, int m[lin][col])
 		}
 		printf("\n");
 	}
-}
+}*/
