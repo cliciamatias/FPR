@@ -1,9 +1,118 @@
-/*Quest„o 01:
-Considerando a existÍncia de uma matriz de inteiros M, de ordem N (ou seja, o no de linhas e o no de colunas s„o iguais a
-N), onde N È uma constante, desenvolver uma funÁ„o que retorne 1 se a seguinte regra for atendida por M (caso contr·rio,
-o valor 0 dever· ser retornado):
-- A soma dos elementos da diagonal principal deve ser igual ‡ soma dos elementos que est„o acima desta
-diagonal, assim como ‡ soma dos elementos abaixo da diagonal.*/
+/*Quest√£o 01:
+Considerando a exist√™ncia de uma matriz de inteiros M, de ordem N (ou seja, o no de linhas e o no de colunas s√£o iguais a
+N), onde N √© uma constante, desenvolver uma fun√ß√£o que retorne 1 se a seguinte regra for atendida por M (caso contr√°rio,
+o valor 0 dever√° ser retornado):
+- A soma dos elementos da diagonal principal deve ser igual √† soma dos elementos que est√£o acima desta
+diagonal, assim como √† soma dos elementos abaixo da diagonal.*/
+#include <stdio.h>
+#define N 5
+void exibirMatriz(int m[N][N]);
+int somaElementos(int m[N][N]);
+void main()
+{
+	int retorno;
+	int m[N][N] = {{6, 3, 1, 2, 6},
+				   {1, 3, 5, 4, 2},
+				   {3, 4, 4, 2, 2},
+			       {5, 9, 1, 9, 3},
+				   {4, 0, 2, 1, 8}};
+	exibirMatriz(m);		
+	retorno = somaElementos(m); //chamando a fun√ß√£o
+	if(retorno == 1)
+	{
+		printf("\nSoma de elementos iguais.");
+	}
+	else
+	{
+		printf("\nSoma de elementos diferentes.");
+	}
+}
+
+int somaElementos(int m[N][N])
+{
+	int i, j, somaDiagonal=0, somaSuperior=0, somaInferior=0;
+	
+	for(i=0; i<N; i++)
+	{
+		for(j=0; j<N; j++)
+		{
+			//verificando os elementos da parte inferior √† diagonal principal
+			if(i == j)
+			{
+				somaDiagonal += m[i][j];
+			}
+			else
+			{
+				if(i > j)
+				{
+					somaSuperior += m[i][j];
+				}
+				else
+				{
+					somaInferior += m[i][j];
+				}
+			}
+		}
+	}
+	
+	//verificando se a soma de cada sao iguais
+	if((somaDiagonal == somaSuperior) && (somaSuperior == somaInferior))
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+void exibirMatriz(int m[N][N])
+{
+	int i, j;
+	printf("Matriz:\n");
+	for(i=0; i<N; i++)
+	{
+		for(j=0; j<N; j++)
+		{
+			printf("%d ", m[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Quest√£o 01:
+Considerando a exist√™ncia de uma matriz de inteiros M, de ordem N (ou seja, o no de linhas e o no de colunas s√£o iguais a
+N), onde N √© uma constante, desenvolver uma fun√ß√£o que retorne 1 se a seguinte regra for atendida por M (caso contr√°rio,
+o valor 0 dever√° ser retornado):
+- A soma dos elementos da diagonal principal deve ser igual √† soma dos elementos que est√£o acima desta
+diagonal, assim como √† soma dos elementos abaixo da diagonal.*/
+/*
 #include <stdio.h>
 #define N 5
 void exibirMatriz(int m[N][N]);
@@ -16,10 +125,10 @@ void main()
 						{3, 4, 4, 2, 2},
 						{5, 9, 1, 9, 3},
 						{4, 0, 2, 1, 8}};
-	//chamando funÁ„o para exibir a matriz					
+	//chamando fun√ß√£o para exibir a matriz					
 	exibirMatriz(matriz);
 	
-	//chamando a funÁ„o com retorno
+	//chamando a fun√ß√£o com retorno
 	retorno = somaElementos(matriz);
 	if(retorno == 1)
 	{
@@ -42,19 +151,19 @@ int somaElementos(int m[N][N])
 		{
 			if(i == j)
 			{
-				//somando os elementos que est„o na diagonal principal
+				//somando os elementos que est√£o na diagonal principal
 				somaDiagonal += m[i][j];
 			}
 			else
 			{
 				if(i > j)
 				{
-					//somando o elementos que est„o acima da diagonal principal
+					//somando o elementos que est√£o acima da diagonal principal
 					somaCima += m[i][j];
 				}
 				else
 				{
-					//somando o elementos que est„o abaixo da diagonal principal
+					//somando o elementos que est√£o abaixo da diagonal principal
 					somaBaixo += m[i][j];
 				}
 			}
@@ -63,11 +172,11 @@ int somaElementos(int m[N][N])
 	//verificando se a soma de cada uma sao iguais
 	if((somaDiagonal == somaCima) && (somaDiagonal == somaBaixo))
 	{
-		return 1; //retornando 1, pois a soma dos elementos de todos s„o iguais
+		return 1; //retornando 1, pois a soma dos elementos de todos s√£o iguais
 	}
 	else
 	{
-		return 0; //retornando 0, pois a soma dos elementos de todos N√O s„o iguais
+		return 0; //retornando 0, pois a soma dos elementos de todos N√ÉO s√£o iguais
 	}
 }
 
@@ -84,4 +193,4 @@ void exibirMatriz(int m[N][N])
 		}
 		printf("\n");
 	}
-}
+}*/
