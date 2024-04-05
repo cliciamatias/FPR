@@ -1,10 +1,82 @@
-/*Quest„o 04:
-Dada uma matriz MLxC, onde L e C s„o constantes, desenvolver uma funÁ„o que verifique se os elementos da matriz est„o
+/*Quest√£o 04:
+Dada uma matriz MLxC, onde L e C s√£o constantes, desenvolver uma fun√ß√£o que verifique se os elementos da matriz est√£o
 ordenados de forma crescente. Para isto, as seguintes regras devem ser atendidas:
-a. Os elementos de cada linha devem estar ordenados crescentemente (ou seja, cada elemento ser· maior ou igual
-‡quele da mesma linha, porÈm da coluna anterior ñ caso exista);
-b. O primeiro elemento de cada linha deve ser maior ou igual ao ˙ltimo da linha anterior (caso exista).
-Caso a matriz M atenda aos critÈrios definidos, o valor 1 dever· ser retornado pela funÁ„o; caso contr·rio, 0.*/
+a. Os elementos de cada linha devem estar ordenados crescentemente (ou seja, cada elemento ser√° maior ou igual
+√†quele da mesma linha, por√©m da coluna anterior ‚Äì caso exista);
+b. O primeiro elemento de cada linha deve ser maior ou igual ao √∫ltimo da linha anterior (caso exista).
+Caso a matriz M atenda aos crit√©rios definidos, o valor 1 dever√° ser retornado pela fun√ß√£o; caso contr√°rio, 0.*/
+#include <stdio.h>
+#define L 5
+#define C 6
+void exibirMatriz(int m[L][C]);
+int matrizCrescente(int m[L][C]);
+void main()
+{
+	int retorno;
+	int m[L][C] = {{11,12,13,14,15,16},
+				   {17,18,19,20,21,22},
+		           {23,24,25,26,27,28},
+		    	   {29,30,31,32,33,34},
+				   {35,36,37,38,39,40}};
+						
+	exibirMatriz(m);
+	retorno = matrizCrescente(m);
+	if(retorno == 1)
+	{
+		printf("\n\nA matriz eh crescente.");
+	}
+	else
+	{
+		printf("\n\nA matriz nao eh crescente.");
+	}
+}
+
+int matrizCrescente(int m[L][C])
+{
+	int i, j;
+	
+	for(i=0; i<L; i++)
+	{
+		for(j=0; j<C; j++)
+		{
+			//cada elemento ser√° maior ou igual √†quele da mesma linha, por√©m da coluna anterior ‚Äì caso exista
+			if(m[i][j] < m[i][j-1])
+			{
+				return 0;
+			}
+			//O primeiro elemento de cada linha deve ser maior ou igual ao √∫ltimo da linha anterior (caso exista).
+			if(m[i][0] < m[i-1][C-1]) //0 pois ser√° comparada apenas a primeira coluna inteira com a linha anterior(i-1) e √∫ltima coluna da linha anterior (C-1)
+			{
+				return 0; //retornando 0 pois n√£o √© crescente
+			}
+		}
+	}
+	return 1; // √© crescente
+}
+
+void exibirMatriz(int m[L][C])
+{
+	int i, j;
+	
+	for(i=0; i<L; i++)
+	{
+		for(j=0; j<C; j++)
+		{
+			printf("|%d| ", m[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+
+/*Quest√£o 04:
+Dada uma matriz MLxC, onde L e C s√£o constantes, desenvolver uma fun√ß√£o que verifique se os elementos da matriz est√£o
+ordenados de forma crescente. Para isto, as seguintes regras devem ser atendidas:
+a. Os elementos de cada linha devem estar ordenados crescentemente (ou seja, cada elemento ser√° maior ou igual
+√†quele da mesma linha, por√©m da coluna anterior ‚Äì caso exista);
+b. O primeiro elemento de cada linha deve ser maior ou igual ao √∫ltimo da linha anterior (caso exista).
+Caso a matriz M atenda aos crit√©rios definidos, o valor 1 dever√° ser retornado pela fun√ß√£o; caso contr√°rio, 0.*/
+/*
 #include <stdio.h>
 #define L 5
 #define C 6
@@ -20,7 +92,7 @@ void main()
 						{35,36,37,38,39,40}};	
 	exibirMatriz(matriz);
 	
-	//chamando a funÁ„o
+	//chamando a fun√ß√£o
 	retorno = matrizCrescente(matriz);
 	//exibindo o respectivo resultado
 	if(retorno == 1)
@@ -40,19 +112,19 @@ int matrizCrescente(int m[L][C])
 	{
 		for(j=1; j<C; j++)
 		{
-			//se 2∞ elemento da coluna(m[i][1]) for menor que o anterior, n„o È crescente
+			//se 2¬∞ elemento da coluna(m[i][1]) for menor que o anterior, n√£o √© crescente
 			if(m[i][j] < m[i][j-1])
 			{
-				return 0; //a matriz n„o È crescente
+				return 0; //a matriz n√£o √© crescente
 			}
-			//verificando se o elemento da 1∞ coluna È menor que o ˙ltimo da linha anterior, pois n„o ser· crescente
+			//verificando se o elemento da 1¬∞ coluna √© menor que o √∫ltimo da linha anterior, pois n√£o ser√° crescente
 			if(m[i][0] < m[i-1][C-1])
 			{
-				return 0; //a matriz n„o È crescente
+				return 0; //a matriz n√£o √© crescente
 			}
 		}
 	}
-	return 1; //a matriz È crescente 
+	return 1; //a matriz √© crescente 
 }
 void exibirMatriz(int m[L][C])
 {
@@ -66,4 +138,4 @@ void exibirMatriz(int m[L][C])
 		}
 		printf("\n");
 	}
-}
+}*/
