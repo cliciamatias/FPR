@@ -43,7 +43,7 @@ int somaElementos(int m[N][N])
 			}
 			else
 			{
-				if(i > j)
+				if(i < j)
 				{
 					somaSuperior += m[i][j];
 				}
