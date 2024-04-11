@@ -1,29 +1,171 @@
-/*Quest�o 05:
-O hist�rico de um aluno � representado por um
-vetor de structs onde cada posi��o armazena o
-c�digo da disciplina cursada, semestre e ano
-que a cumpriu e a m�dia final na disciplina.
-Implementar uma fun��o que exiba o hist�rico
+/*Questão 05:
+O histórico de um aluno é representado por um
+vetor de structs onde cada posição armazena o
+código da disciplina cursada, semestre e ano
+que a cumpriu e a média final na disciplina.
+Implementar uma função que exiba o histórico
 do aluno com o seguinte formato:
-NomeDisciplina1 (c�digo1) M�diaDisciplina1
-NomeDisciplina2 (c�digo2) M�diaDisciplina2
-NomeDisciplinaN (c�digoN) M�diaDisciplinaN
+NomeDisciplina1 (código1) MédiaDisciplina1
+NomeDisciplina2 (código2) MédiaDisciplina2
+NomeDisciplinaN (códigoN) MédiaDisciplinaN
 Coeficiente de rendimento: CR
 
-Observa��es:
+Observações:
 1. Para obter os dados da disciplina, um outro
 vetor de structs deve ser consultado. Este,
 por sua vez, armazena para cada disciplina
-do curso as seguintes informa��es: c�digo,
-nome e n�mero de cr�ditos;
+do curso as seguintes informações: código,
+nome e número de créditos;
 2. O coeficiente de rendimento consiste em
-uma m�dia ponderada de todos os graus
-atribu�dos �s disciplinas cursadas, onde os
-pesos s�o representados pelo n�mero de
-cr�ditos da disciplina;
+uma média ponderada de todos os graus
+atribuídos às disciplinas cursadas, onde os
+pesos são representados pelo número de
+créditos da disciplina;
 3. Todos os dados em negrito apresentados no
-formato do hist�rico devem ser obtidos a
+formato do histórico devem ser obtidos a
 partir dos vetores.*/
+#include <stdio.h>
+#define TAM 3
+
+typedef struct 
+{
+	int codigo[10];
+	int semestre;
+	int ano;
+	float mediaFinal;
+}THistorico;
+
+typedef struct
+{
+	int codigoDisc;
+	char nome[30];
+	float creditos;
+}TDisciplina;
+
+void lerDados(THistorico hist[], TDisciplina disc[], int tamanho);
+void exibirHistoricoAluno(THistorico hist[], TDisciplina disc[], int tamanho);
+
+void main()
+{
+	THistorico hist[TAM];
+	TDisciplina disc[TAM];
+	
+	lerDados(hist, disc, TAM); //chamando a função que lê os dados
+	
+	exibirHistoricoAluno(hist, disc, TAM); //chamando a função que exibe o historico do aluno
+}
+
+void lerDados(THistorico hist[], TDisciplina disc[], int tamanho)
+{
+	int i;
+	
+	for(i=0; i<tamanho; i++)
+	{
+		//ler dados do histórico
+		printf("Codigo da disciplina: ");
+		scanf("%d", &hist[i].codigo);
+		
+		printf("Semestre: ");
+		scanf("%d", &hist[i].semestre);
+		
+		printf("Ano: ");
+		scanf("%d", &hist[i].ano);
+		
+		printf("Media final: ");
+		scanf("%f", &hist[i].mediaFinal);
+		
+		//lendo dados da dsiciplina
+		printf("\nCodigo Disciplina: ");
+		scanf("%d", &disc[i].codigoDisc);
+		
+		printf("Nome: ");
+		gets(disc[i].nome);
+		
+		printf("Creditos: ");
+		scanf("%f", &disc[i].creditos);	
+	}
+}
+
+
+/*Implementar uma função que exiba o histórico
+do aluno com o seguinte formato:
+NomeDisciplina1 (código1) MédiaDisciplina1
+NomeDisciplina2 (código2) MédiaDisciplina2
+NomeDisciplinaN (códigoN) MédiaDisciplinaN
+Coeficiente de rendimento: CR*/
+void exibirHistoricoAluno(THistorico hist[], TDisciplina disc[], int tamanho)
+{
+//  O coeficiente de rendimento consiste em uma média ponderada de todos os graus 
+// atribuídos às disciplinas cursadas, onde os pesos são representados pelo número de créditos da disciplina;
+
+	int i;
+	
+	//calcular o coeficiente de rendimento
+	for(i=0; i<tamanho; i++)
+	{
+		
+	}
+}
+
+
+
+
+
+
+
+
+//3. Todos os dados em negrito apresentados no formato do histórico devem ser obtidos a partir dos vetores.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Questão 05:
+O histórico de um aluno é representado por um
+vetor de structs onde cada posição armazena o
+código da disciplina cursada, semestre e ano
+que a cumpriu e a média final na disciplina.
+Implementar uma função que exiba o histórico
+do aluno com o seguinte formato:
+NomeDisciplina1 (código1) MédiaDisciplina1
+NomeDisciplina2 (código2) MédiaDisciplina2
+NomeDisciplinaN (códigoN) MédiaDisciplinaN
+Coeficiente de rendimento: CR
+
+Observações:
+1. Para obter os dados da disciplina, um outro
+vetor de structs deve ser consultado. Este,
+por sua vez, armazena para cada disciplina
+do curso as seguintes informações: código,
+nome e número de créditos;
+2. O coeficiente de rendimento consiste em
+uma média ponderada de todos os graus
+atribuídos às disciplinas cursadas, onde os
+pesos são representados pelo número de
+créditos da disciplina;
+3. Todos os dados em negrito apresentados no
+formato do histórico devem ser obtidos a
+partir dos vetores.*/
+/*
 #include <stdio.h>
 #include <string.h>
 #define TAM 3
@@ -69,7 +211,7 @@ void main()
 	strcpy(disciplina[4].nome, "LPO");
 	disciplina[4].creditos = 50;
 	
-	//declarando dados das vari�veis
+	//declarando dados das variáveis
 	histAluno[0].codigoDisciplina = 101;
 	histAluno[0].semestre = 2;
 	histAluno[0].ano = 2020;
@@ -90,22 +232,22 @@ void exibirHistorico(tipoDisciplina disciplina[], int tamanho2, tipoHistorico hi
 	int i, j, somaCredito=0;
 	float  multip, soma=0, media;
 	
-	//percorrendo o hist�rico do alunos
+	//percorrendo o histórico do alunos
 	for(i=0; i<tamanho; i++)
 	{
 		//percorrendo as disciplinas existentes no curso
 		for(j=0; j<tamanho2; j++)
 		{
-			//verificando as disciplinas que o aluno foi matriculado de acordo com o c�digo
+			//verificando as disciplinas que o aluno foi matriculado de acordo com o código
 			if(histAluno[i].codigoDisciplina == disciplina[j].codigo)
 			{
-				//multiplicando a nota pelo seu respectivo cr�dito
+				//multiplicando a nota pelo seu respectivo crédito
 				multip = histAluno[i].mediaFinal * disciplina[i].creditos;
 				
-				//somando as multiplica��es feitas 
+				//somando as multiplicações feitas 
 				soma += multip;
 				
-				//somando os cr�ditos;
+				//somando os créditos;
 				somaCredito += disciplina[i].creditos;
 				
 				//exibindo resultado
@@ -113,8 +255,8 @@ void exibirHistorico(tipoDisciplina disciplina[], int tamanho2, tipoHistorico hi
 			}
 		}
 	}
-	//calculando a m�dia ponderada
+	//calculando a média ponderada
 	media = soma / (float)somaCredito;
 	//retornando o resultado do CR
 	printf("\nCoeficiente de Rendimento (CR): %.2f", media);
-}
+}*/
