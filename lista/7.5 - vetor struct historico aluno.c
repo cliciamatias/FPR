@@ -25,7 +25,7 @@ créditos da disciplina;
 formato do histórico devem ser obtidos a
 partir dos vetores.*/
 #include <stdio.h>
-#define TAM 3
+#define TAM 1
 
 typedef struct 
 {
@@ -62,7 +62,7 @@ void lerDados(THistorico hist[], TDisciplina disc[], int tamanho)
 	for(i=0; i<tamanho; i++)
 	{
 		//ler dados do histórico
-		printf("Codigo da disciplina: ");
+		printf("\n--------------------\nCodigo: ");
 		scanf("%d", &hist[i].codigo);
 		
 		printf("Semestre: ");
@@ -75,10 +75,11 @@ void lerDados(THistorico hist[], TDisciplina disc[], int tamanho)
 		scanf("%f", &hist[i].mediaFinal);
 		
 		//lendo dados da dsiciplina
-		printf("\nCodigo Disciplina: ");
+		printf("\n\nCodigo Disciplina: ");
 		scanf("%d", &disc[i].codigoDisc);
 		
 		printf("Nome: ");
+		fflush(stdin);
 		gets(disc[i].nome);
 		
 		printf("Creditos: ");
@@ -99,45 +100,32 @@ void exibirHistoricoAluno(THistorico hist[], TDisciplina disc[], int tamanho)
 // atribuídos às disciplinas cursadas, onde os pesos são representados pelo número de créditos da disciplina;
 
 	int i;
+	float somaMediaCreditos=0, somaCreditos=0, cr;
 	
+	printf("\n\n--------Historico---------");
 	//calcular o coeficiente de rendimento
 	for(i=0; i<tamanho; i++)
 	{
-		
+		//verificando o historico do aluno pelo codigo
+		if(hist[i].codigo == disc[i].codigoDisc)
+		{
+			//somando a multiplicação da nota final com o credito da respectiva matéria
+			somaMediaCreditos += hist[i].mediaFinal * disc[i].creditos; 
+			//somando creditos para calcular o coeficiente de rendimento
+			somaCreditos += disc[i].creditos; 
+		}
+		printf("\n%s (%d) %f", disc[i].nome, disc[i].codigoDisc, hist[i].mediaFinal);
 	}
+	//calculando o coeficiente de rendimento
+	cr = somaMediaCreditos / somaCreditos;
+	printf("\n-------- CR: %.1f ---------", cr);
 }
 
 
 
 
 
-
-
-
-//3. Todos os dados em negrito apresentados no formato do histórico devem ser obtidos a partir dos vetores.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//---------------------------------------------------
 
 /*Questão 05:
 O histórico de um aluno é representado por um
