@@ -1,6 +1,31 @@
-/*Quest„o 08:
-Desenvolver uma funÁ„o recursiva que, dada
+/*Quest√£o 08:
+Desenvolver uma fun√ß√£o recursiva que, dada
 uma string, exiba-a invertida.*/
+#include <stdio.h>
+#include <string.h>
+void recursivo(char s1[], int tamanho);
+void main()
+{
+	char s1[10] = "ok";
+	int tamanho = strlen(s1);
+	recursivo(s1, tamanho-1);
+}
+void recursivo(char s1[], int tamanho)
+{
+	if(s1[tamanho])
+	{
+		printf("%c", s1[tamanho]);
+		recursivo(s1, tamanho-1);
+	}
+}
+
+
+// ------------------------------------------------------------------------------------
+
+/*Quest√£o 08:
+Desenvolver uma fun√ß√£o recursiva que, dada
+uma string, exiba-a invertida.*/
+/*
 #include <stdio.h>
 #include <string.h>
 
@@ -19,7 +44,8 @@ void invertido(char s[], int tamanho)
 	{
 		//exibindo a string invertida
 		printf("%c", s[tamanho]);
-		//invertendo os caracateres atravÈs do 'tamanho-1'
+		//invertendo os caracateres atrav√©s do 'tamanho-1'
 		invertido(s, tamanho-1);
 	}
 }
+*/
