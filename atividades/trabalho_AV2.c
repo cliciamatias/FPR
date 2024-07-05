@@ -3,356 +3,300 @@
 
 #define TAM 10
 
-//definindo tipos
-typedef struct No {
-    int valor;
-    struct No* prox;
+typedef struct No
+{
+	int valor;
+	struct No *prox;
 } TNo;
 
-typedef struct {
-    TNo* inicio;
-} TLista;
+typedef TNo* TLista;
 
-//protótipo das funções
-int tabelaHash(int numero);
-void inicializarLista(TLista *L);
-void inicializarTabela(TLista tabela[]);
-int buscarLista(TLista *L, int numero);
-int inserirLista(TLista *L, int numero);
-int removerLista(TLista *L, int numero);
-int alterarLista(TLista *L, int velho, int novo);
-void exibirLista(TLista *L);
-void inserirNaTabela(TLista tabela[], int numero);
-int buscaNaTabela(TLista tabela[], int numero);
-int removerDaTabela(TLista tabela[], int numero);
-int alterarNaTabela(TLista tabela[], int velho, int novo);
-void exibirTabela(TLista tabela[]);
-int menu();
-
-void main()
+int tabelaHash(int n)
 {
-    TLista tabela[TAM];
-    int num, novo, retorno, opcao;
-
-    inicializarTabela(tabela);
-
-    do
-	{
-        system("CLS"); //limpar tela
-        
-        opcao = menu(); //chamando função menu
-        
-        switch(opcao)
-		{
-			//Inserir
-            case 1:
-                printf("\nEntre com o valor a ser inserido: ");
-                scanf("%d", &num);
-                
-                inserirNaTabela(tabela, num); //chamando função
-                break;
-                
-            //Buscar
-            case 2:
-                printf("\nEntre com o valor a ser buscado: ");
-                scanf("%d", &num);
-                
-                retorno = buscaNaTabela(tabela, num); //chamando função
-                
-                //verificando se o valor foi encontrado
-                if(retorno)
-				{
-                    printf("\nValor encontrado com sucesso!\n");
-                }
-				else
-				{
-                    printf("\nErro ao encontrar valor. Tente novamente.\n");
-                }
-                break;
-                
-            //Remover
-            case 3:
-                printf("\nEntre com o valor a ser removido: ");
-                scanf("%d", &num);
-                
-                retorno = removerDaTabela(tabela, num); //chamando a função
-                
-                //verificando se valor foi removido
-                if(retorno)
-				{
-                    printf("\nValor removido com sucesso!\n");
-                }
-				else
-				{
-                    printf("\nNao ha este valor! Tente novamente.\n");
-                }
-                break;
-                
-            //Alterar
-            case 4:
-                printf("\nEntre com o valor a ser alterado: ");
-                scanf("%d", &num);
-                printf("\nEntre com o novo valor: ");
-                scanf("%d", &novo);
-                
-                retorno = alterarNaTabela(tabela, num, novo); //chamando a função
-                
-                //verificando se valor foi alterado
-                if(retorno)
-				{
-                    printf("\nValor alterado com sucesso!\n");
-                }
-				else
-				{
-                    printf("\nErro ao alterar o valor! Tente novamente.\n");
-                }
-                break;
-                
-            //Exibir tabela
-            case 5:
-            	printf("\n----------------- TABELA -------------------\n\n");
-                exibirTabela(tabela); //chamando a função
-                printf("\n---------------------------------------------\n\n");
-                break;
-                
-            //Sair
-            case 0:
-                printf("\nPrograma finalizado!\n\n");
-                break;
-                
-            default:
-                printf("\n\nOpcao invalida! Tente novamente.\n");
-        }
-        system("PAUSE");
-        
-    } while(opcao != 0);
+	return n % TAM;
 }
 
-int tabelaHash(int numero)
+TLista buscar (TLista L[], int n)
 {
-    return numero % TAM; //retornando o resto do numero para saber sua lista (0 a 9)
-}
-
-void inicializarLista(TLista *L)
-{
-    L->inicio = NULL; //inicializando para que o início de cada lista fique vazia
-}
-
-void inicializarTabela(TLista tabela[])
-{
-    int i;
-    
-    //percorrendo a tebela
-	for(i=0; i<TAM; i++)
-	{
-		//percorrendo o endereço de cada posição(lista) da tebela
-        inicializarLista(&tabela[i]);
-    }
-}
-
-int buscarLista(TLista *L, int numero)
-{
-    TNo *aux = L->inicio;
-    
-    //percorrendo a lista
-    while(aux)
-	{
-		//verificando se 'numero' foi encontrado na lista
-        if(aux->valor == numero)
-		{
-            return 1; //'numero' encontrado
-        }
-        //atualizanod 'aux'
-        aux = aux->prox;
-    }
-    return 0; //'numero' não encontrado
-}
-
-int inserirLista(TLista *L, int numero)
-{
-	TNo *aux;
-	int existe = buscarLista(L, numero); //chamando função q verifica se já existe 'numero' na lista
+	int p = tabelaHash(n);
+	TLista aux = L[p];
 	
-    if(existe)
+	//percorrendo a lista
+	while(aux)
 	{
-        return 0; //já existe, retornar 0
-    }
-    else
-    {
-    	aux = (TNo*) malloc (sizeof(TNo)); //alocando memória para o numero a ser inserido  	
-    }
-    
-    //verificando se houve erro na alocação
-    if(!aux)
-	{
-        printf("\nErro ao alocar memoria!");
-        return 0;
-    }
-    else
-    {
-    	//armazenando 'numero' na posição alocada recentemente
-	    aux->valor = numero;
-	    
-	    //novo nó apontando para o priemiro nó da lista (início da lista)
-	    aux->prox = L->inicio;
-	    
-	    //antigo primeiro nó apontando para o novo nó
-	    L->inicio = aux;
-	    
-	    return 1; //retornando 1 pois elemento foi alocado
-    }
-}
-
-int removerLista(TLista *L, int numero)
-{
-    TNo *aux = L->inicio;
-    TNo *anterior = NULL;
-    
-    while(aux)
-	{
-        if(aux->valor == numero)
+		//verificando se 'n' foi encontrado na lista
+		if (aux->valor == n)
 		{
-            if(anterior)
-			{
-                anterior->prox = aux->prox;
-            }
-			else
-			{
-                L->inicio = aux->prox;
-            }
-            free(aux);
-            return 1;
-        }
-        anterior = aux;
-        aux = aux->prox;
-    }
-    return 0;
+			return aux;
+		}
+		//atualizando 'aux'
+		aux = aux->prox;
+	}
+	return NULL;
 }
 
-int alterarLista(TLista *L, int velho, int novo)
+int inserir (TLista L[], int n)
 {
-	//verificando se o novo valor existe na lista
-    if(buscarLista(L, novo))
+	TLista aux;
+	int p = tabelaHash(n);
+	
+	//verificando se já existe 'n' na lista
+	if(buscar(L, n))
 	{
-        return 0; //retornando 0 pois já existe
-    }
-    
-    //inicializando ponteiro de 'aux'
-    TNo *aux = L->inicio;
-    
-    //percorrendo a lista
-    while(aux)
-	{
-		//verificando se valor é igual ao escolhido para ser alterado
-        if(aux->valor == velho)
-		{
-			//recebendo o novo valor
-            aux->valor = novo;
-            return 1 ;
-        }
-        //atualizando 'aux'
-        aux = aux->prox;
-    }
-    return 0; //retornando 0 pois valor não enocntrado para ser alterado
-}
-
-void exibirLista(TLista *L)
-{
-    TNo *aux = L->inicio;
-    
-    printf("Lista: ");
-    //percorrendo a lista
-    while(aux)
-	{
-        printf("%d ", aux->valor); //exibindo a lista
-        
-        //atualizando 'aux' para que todos os elementos da lista sejam exibidos
-        aux = aux->prox;
-    }
-    printf("\n");
-}
-
-void inserirNaTabela(TLista tabela[], int numero)
-{
-	//'posicao' recebendo resto da divisão de 'numero' para identificar sua posição na tabela
-    int posicao = tabelaHash(numero); 
-    int insere = inserirLista(&tabela[posicao], numero); //chamando função que insere elemento na lista
-    
-    //verificando se já há o numero na lista
-    if(!insere)
-	{
-        printf("Erro! Numero repetido.\n");
-    }
-}
-
-int buscaNaTabela(TLista tabela[], int numero)
-{
-    int posicao = tabelaHash(numero);
-    
-    //buscando e retornando en qual posição do vetor 'tabela' o 'numero' está alocado
-    return buscarLista(&tabela[posicao], numero);
-}
-
-int removerDaTabela(TLista tabela[], int numero)
-{
-    int posicao = tabelaHash(numero);
-    
-    //chamando função que remove elemento da lista
-    return removerLista(&tabela[posicao], numero);
-}
-
-int alterarNaTabela(TLista tabela[], int velho, int novo)
-{
-    int posicaoVelho = tabelaHash(velho); //recebendo a posição do valor antigo
-    int posicaoNovo = tabelaHash(novo); //recebendo a posição do novo valor
-    
-    //verificando se ambos os valores estão na mesma posição na tabela, para apenas alterar na mesma lista
-    if(posicaoVelho == posicaoNovo)
-	{
-		//alterando os valores dentro da lista
-        return alterarLista(&tabela[posicaoVelho], velho, novo);
-    }
+		return 0; //já existe, retornando 0 pois não pode valor repetido
+	}
 	else
 	{
-		//removendo o antigo valor da sua lista atual
-        if(removerLista(&tabela[posicaoVelho], velho))
+		aux = (TLista) malloc (sizeof(TNo)); //alocando memória para o número ser inserido
+		
+		//verificando se houve erro na alocação
+		if(!aux)
 		{
-			//inserindo o novo valor na sua respectiva lista
-            return inserirLista(&tabela[posicaoNovo], novo);
-        } 
+			return 0; //nao alocado
+		}
 		else
 		{
-            return 0; //se houve erro, retornando 0
-        }
-    }
+			//inserindo o valor na tabela
+			aux->valor = n;
+			aux->prox = L[p];
+			L[p] = aux;
+			
+			return 1; //'n' alocado
+		}
+	} 
+	
 }
 
-void exibirTabela(TLista tabela[])
+int remover (TLista L[], int n)
+{
+	TLista pre, pos;
+	int p = tabelaHash(n);
+	
+	if (L[p])
+	{
+		if (L[p]->valor == n)
+		{
+			pre = L[p];   
+				
+			L[p] = pre->prox;       
+				
+			free (pre);
+				
+			return 1;
+		} 
+		else
+		{
+			pos = (L[p])->prox;
+			
+			pre = L[p];
+			
+			while (pos)
+			{
+
+				if (pos->valor == n)
+				{
+					
+					pre->prox = pos->prox;
+					
+					
+					free (pos);
+	
+					return 1;
+				}
+				else
+				{
+					pre = pos;
+					pos = pos->prox;  
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+int alterar (TLista L[], int velho, int novo)
+{
+	TLista posnovo, posvelho;
+	posvelho = buscar(L, velho);
+	posnovo = buscar(L, novo);
+	
+	//verificando se não existe o valor a ser alterado para notificar erro ao alterar vslor que nao existe
+	if(!posvelho)
+	{
+		return 0; 
+	}
+	else
+	{
+		//verificando se valor a ser inserido já existe, pois não é permitido repetição
+		if(posnovo)
+		{
+			return 0;
+		}
+		else
+		{	
+			//verificando se valores a serem alterados estão na mesma posição da tabela
+			if(tabelaHash(velho) == tabelaHash(novo))
+			{
+				//recebendo o novo valor
+				posvelho->valor = novo;
+				return 1;
+			}
+			else
+			{
+				//inserindo o novo valor e removendo o antigo em suas respectivas posições
+			 	inserir(L, novo);
+				remover(L, velho);
+				return 1;	
+			}
+		}
+	}	
+}
+
+void exibir (TLista L[])
 {
 	int i;
 	
-	//percorrendo a tabela 
-    for(i=0; i<TAM; i++)
+	//percorrendo a tabela
+	for(i=0; i<TAM; i++)
 	{
-		//exibindo tabela contendo as listas encadeadas
-        printf(" [%d] = ", i);
-        exibirLista(&tabela[i]);
-    }
+		TLista aux = L[i];
+		
+		if(!L[i])
+		{
+			printf("LISTA [%d]: Vazia!", i);
+		}
+		else
+		{
+			printf("LISTA [%d]: ", i);
+			while(aux)
+			{
+				printf("%d ", aux->valor);
+				
+				//atualizando 'aux'
+				aux = aux->prox;
+			}
+		}
+		printf("\n");
+	}
+	
 }
 
-int menu()
+int menu ()
+{	
+	int operacao;
+	
+	printf("Menu de Operacoes:\n\n");
+	printf("(1) Inserir\n");
+	printf("(2) Remover\n");
+	printf("(3) Alterar\n");
+	printf("(4) Buscar\n");
+	printf("(5) Exibir\n");
+	printf("(6) Sair\n\n");
+	
+	printf("Entre com sua opcao: ");
+	scanf("%d", &operacao);
+	
+	return operacao;
+}
+
+void main()
 {
-    int opcao;
-    
-    printf("\nMenu de opcoes:\n");
-    printf("(1) Inserir\n");
-    printf("(2) Buscar\n");
-    printf("(3) Remover\n");
-    printf("(4) Alterar\n");
-    printf("(5) Exibir\n");
-    printf("(0) Sair\n\n");
-    
-    printf("Entre com a sua opcao: ");
-    scanf("%d", &opcao);
-    return opcao;
+	TLista L[TAM];
+	TLista pos;
+	int num1, num2, op, resp, i;
+	
+	for(i=0;i<TAM;i++)
+	{
+		L[i] = NULL;
+	}
+	
+	do
+	{
+		system("CLS");
+		
+		op = menu(); //chamando função menu
+		
+		switch (op)
+		{
+			//Inserir
+			case 1:
+				printf("Entre com o valor a ser inserido: ");
+				scanf("%d", &num1);
+				
+				if(inserir(L, num1))
+				{
+					printf("\n\tNumero inserido com sucesso!\n");
+				}
+				else
+				{
+					printf("\n\tNumero nao inserido!\n");	
+				}
+				break;
+				
+			//Remover
+			case 2:
+				printf("Entre com o valor a ser removido: ");
+				scanf("%d", &num1);
+				
+				if(remover(L, num1))
+				{
+					printf("\n\tValor removido com sucesso!\n");
+				}
+				else
+				{
+					printf("\n\tValor não removido.\n");
+				}
+				break;
+				
+			//Alterar
+			case 3:
+				printf("Entre com o valor a ser Alterado: ");
+				scanf("%d", &num1);
+				printf("Entre com o valor o novo valor: ");
+				scanf("%d", &num2);
+				
+				if(alterar(L, num1, num2))
+				{
+					printf("\n\tValor Alterado com sucesso!\n");
+				}
+				else
+				{
+					printf("\n\tValor nao foi alterado.\n");
+				}
+				break;
+				
+			//Buscar
+			case 4:
+				printf("Entre com o valor a ser buscado: ");
+				scanf("%d", &num1);
+				
+				pos = buscar(L, num1);
+				if(pos)
+				{
+					printf("\n\tO valor foi encontrado na lista!\n");		
+				}
+				else
+				{
+					printf("\n\tO valor nao esta na lista!\n");	
+				}
+				break;
+				
+			//Exibir tabela
+			case 5:
+				printf("\n----------------- TABELA -------------------\n\n");
+				exibir(L);
+				printf("\n---------------------------------------------\n\n");
+				break;
+				
+			//Sair
+			case 6: 
+				printf("\n\tPrograma finalizado.\n\n");
+				break;
+				
+			default: 
+				printf("\n\tOpcao invalida! Tente novamente.\n");	
+		}
+		system("PAUSE");
+	}
+	while(op != 6);	
 }
