@@ -203,7 +203,7 @@ void main()
 {
 	TLista L[TAM];
 	TLista pos;
-	int num1, num2, op, resp, i;
+	int num1, num2, op, i;
 	
 	for(i=0;i<TAM;i++)
 	{
