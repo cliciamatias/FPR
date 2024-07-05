@@ -3,6 +3,7 @@
 
 #define TAM 10
 
+//definindo tipos
 typedef struct No {
     int valor;
     struct No* prox;
@@ -12,12 +13,127 @@ typedef struct {
     TNo* inicio;
 } TLista;
 
+//protótipo das funções
+int tabelaHash(int numero);
+void inicializarLista(TLista *L);
+void inicializarTabela(TLista tabela[]);
+int buscarLista(TLista *L, int numero);
+int inserirLista(TLista *L, int numero);
+int removerLista(TLista *L, int numero);
+int alterarLista(TLista *L, int velho, int novo);
+void exibirLista(TLista *L);
+void inserirNaTabela(TLista tabela[], int numero);
+int buscaNaTabela(TLista tabela[], int numero);
+int removerDaTabela(TLista tabela[], int numero);
+int alterarNaTabela(TLista tabela[], int velho, int novo);
+void exibirTabela(TLista tabela[]);
+int menu();
+
+void main()
+{
+    TLista tabela[TAM];
+    int num, novo, retorno, opcao;
+
+    inicializarTabela(tabela);
+
+    do
+	{
+        system("CLS"); //limpar tela
+        
+        opcao = menu(); //chamando função menu
+        
+        switch(opcao)
+		{
+			//Inserir
+            case 1:
+                printf("\nEntre com o valor a ser inserido: ");
+                scanf("%d", &num);
+                
+                inserirNaTabela(tabela, num); //chamando função
+                break;
+                
+            //Buscar
+            case 2:
+                printf("\nEntre com o valor a ser buscado: ");
+                scanf("%d", &num);
+                
+                retorno = buscaNaTabela(tabela, num); //chamando função
+                
+                //verificando se o valor foi encontrado
+                if(retorno)
+				{
+                    printf("\nValor encontrado com sucesso!\n");
+                }
+				else
+				{
+                    printf("\nErro ao encontrar valor. Tente novamente.\n");
+                }
+                break;
+                
+            //Remover
+            case 3:
+                printf("\nEntre com o valor a ser removido: ");
+                scanf("%d", &num);
+                
+                retorno = removerDaTabela(tabela, num); //chamando a função
+                
+                //verificando se valor foi removido
+                if(retorno)
+				{
+                    printf("\nValor removido com sucesso!\n");
+                }
+				else
+				{
+                    printf("\nNao ha este valor! Tente novamente.\n");
+                }
+                break;
+                
+            //Alterar
+            case 4:
+                printf("\nEntre com o valor a ser alterado: ");
+                scanf("%d", &num);
+                printf("\nEntre com o novo valor: ");
+                scanf("%d", &novo);
+                
+                retorno = alterarNaTabela(tabela, num, novo); //chamando a função
+                
+                //verificando se valor foi alterado
+                if(retorno)
+				{
+                    printf("\nValor alterado com sucesso!\n");
+                }
+				else
+				{
+                    printf("\nErro ao alterar o valor! Tente novamente.\n");
+                }
+                break;
+                
+            //Exibir tabela
+            case 5:
+            	printf("\n----------------- TABELA -------------------\n\n");
+                exibirTabela(tabela); //chamando a função
+                printf("\n---------------------------------------------\n\n");
+                break;
+                
+            //Sair
+            case 0:
+                printf("\nPrograma finalizado!\n\n");
+                break;
+                
+            default:
+                printf("\n\nOpcao invalida! Tente novamente.\n");
+        }
+        system("PAUSE");
+        
+    } while(opcao != 0);
+}
+
 int tabelaHash(int numero)
 {
     return numero % TAM; //retornando o resto do numero para saber sua lista (0 a 9)
 }
 
-void inicializarLista(TLista* L)
+void inicializarLista(TLista *L)
 {
     L->inicio = NULL; //inicializando para que o início de cada lista fique vazia
 }
@@ -225,103 +341,4 @@ int menu()
     printf("Entre com a sua opcao: ");
     scanf("%d", &opcao);
     return opcao;
-}
-
-void main()
-{
-    TLista tabela[TAM];
-    int num, novo, retorno, opcao;
-
-    inicializarTabela(tabela);
-
-    do
-	{
-        system("CLS"); //limpar tela
-        
-        opcao = menu(); //chamando função menu
-        
-        switch(opcao)
-		{
-			//Inserir
-            case 1:
-                printf("\nEntre com o valor a ser inserido: ");
-                scanf("%d", &num);
-                
-                inserirNaTabela(tabela, num); //chamando função
-                break;
-                
-            //Buscar
-            case 2:
-                printf("\nEntre com o valor a ser buscado: ");
-                scanf("%d", &num);
-                
-                retorno = buscaNaTabela(tabela, num); //chamando função
-                
-                //verificando se o valor foi encontrado
-                if(retorno)
-				{
-                    printf("\nValor encontrado com sucesso!\n");
-                }
-				else
-				{
-                    printf("\nErro ao encontrar valor. Tente novamente.\n");
-                }
-                break;
-                
-            //Remover
-            case 3:
-                printf("\nEntre com o valor a ser removido: ");
-                scanf("%d", &num);
-                
-                retorno = removerDaTabela(tabela, num); //chamando a função
-                
-                //verificando se valor foi removido
-                if(retorno)
-				{
-                    printf("\nValor removido com sucesso!\n");
-                }
-				else
-				{
-                    printf("\nNao ha este valor! Tente novamente.\n");
-                }
-                break;
-                
-            //Alterar
-            case 4:
-                printf("\nEntre com o valor a ser alterado: ");
-                scanf("%d", &num);
-                printf("\nEntre com o novo valor: ");
-                scanf("%d", &novo);
-                
-                retorno = alterarNaTabela(tabela, num, novo); //chamando a função
-                
-                //verificando se valor foi alterado
-                if(retorno)
-				{
-                    printf("\nValor alterado com sucesso!\n");
-                }
-				else
-				{
-                    printf("\nErro ao alterar o valor! Tente novamente.\n");
-                }
-                break;
-                
-            //Exibir tabela
-            case 5:
-            	printf("\n----------------- TABELA -------------------\n\n");
-                exibirTabela(tabela); //chamando a função
-                printf("\n---------------------------------------------\n\n");
-                break;
-                
-            //Sair
-            case 0:
-                printf("\n\nPrograma finalizado!\n");
-                break;
-                
-            default:
-                printf("\n\nOpcao invalida! Tente novamente.\n");
-        }
-        system("PAUSE");
-        
-    } while(opcao != 0);
 }
