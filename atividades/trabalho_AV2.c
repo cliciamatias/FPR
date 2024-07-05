@@ -1,8 +1,15 @@
+/*========================================
+Alunos: Clicia Matias e Bruno
+2FPR - Manhã
+==========================================
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
 #define TAM 10
 
+//definindo os tipos
 typedef struct No
 {
 	int valor;
@@ -11,6 +18,7 @@ typedef struct No
 
 typedef TNo* TLista;
 
+//implementação das funções
 int tabelaHash(int n)
 {
 	return n % TAM;
