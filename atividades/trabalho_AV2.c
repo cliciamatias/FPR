@@ -231,22 +231,29 @@ int removerLista(TLista *L, int numero)
 
 int alterarLista(TLista *L, int velho, int novo)
 {
+	//verificando se o novo valor existe na lista
     if(buscarLista(L, novo))
 	{
-        return 0; 
+        return 0; //retornando 0 pois já existe
     }
+    
+    //inicializando ponteiro de 'aux'
     TNo *aux = L->inicio;
     
+    //percorrendo a lista
     while(aux)
 	{
+		//verificando se valor é igual ao escolhido para ser alterado
         if(aux->valor == velho)
 		{
+			//recebendo o novo valor
             aux->valor = novo;
             return 1 ;
         }
+        //atualizando 'aux'
         aux = aux->prox;
     }
-    return 0;
+    return 0; //retornando 0 pois valor não enocntrado para ser alterado
 }
 
 void exibirLista(TLista *L)
@@ -290,27 +297,32 @@ int removerDaTabela(TLista tabela[], int numero)
 {
     int posicao = tabelaHash(numero);
     
+    //chamando função que remove elemento da lista
     return removerLista(&tabela[posicao], numero);
 }
 
 int alterarNaTabela(TLista tabela[], int velho, int novo)
 {
-    int posicaoVelho = tabelaHash(velho);
-    int posicaoNovo = tabelaHash(novo);
+    int posicaoVelho = tabelaHash(velho); //recebendo a posição do valor antigo
+    int posicaoNovo = tabelaHash(novo); //recebendo a posição do novo valor
     
+    //verificando se ambos os valores estão na mesma posição na tabela, para apenas alterar na mesma lista
     if(posicaoVelho == posicaoNovo)
 	{
+		//alterando os valores dentro da lista
         return alterarLista(&tabela[posicaoVelho], velho, novo);
     }
 	else
 	{
+		//removendo o antigo valor da sua lista atual
         if(removerLista(&tabela[posicaoVelho], velho))
 		{
+			//inserindo o novo valor na sua respectiva lista
             return inserirLista(&tabela[posicaoNovo], novo);
         } 
 		else
 		{
-            return 0;
+            return 0; //se houve erro, retornando 0
         }
     }
 }
@@ -319,8 +331,10 @@ void exibirTabela(TLista tabela[])
 {
 	int i;
 	
+	//percorrendo a tabela 
     for(i=0; i<TAM; i++)
 	{
+		//exibindo tabela contendo as listas encadeadas
         printf(" [%d] = ", i);
         exibirLista(&tabela[i]);
     }
