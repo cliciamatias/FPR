@@ -1,5 +1,5 @@
 /*========================================
-Alunos: Clicia Matias e Bruno
+Alunos: Clicia Matias e Bruno dos Santos Gonçalves
 2FPR - Manhã
 ==========================================
 */
